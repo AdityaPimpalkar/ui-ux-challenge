@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { Listings } from "./front/Listings";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // Nav bar implementation:
+    // Starting with a flex box div and inside we can put two elements, one with the company icon and the other is the user
+    // profile icon, applying the justify-between class of tailwind should allow us to put them on two seperate ends
+
+    // User profile information:
+    // we can reuse the existing Card component, pass the title as username, subtitle as user email address and fotterLeftContent
+    // as an anchor tag to view users full profile and fotterRightContent as a button to sign out
+    <div className="m-5">
+      <Listings />
     </div>
   );
 }
