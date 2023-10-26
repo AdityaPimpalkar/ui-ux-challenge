@@ -17,6 +17,12 @@ module.exports = {
         100: "#BBA4FB",
         200: "#BBA4FB30",
       },
+      white: {
+        100: "#fff",
+      },
+      black: {
+        100: "#000",
+      },
     },
     extend: {},
   },
