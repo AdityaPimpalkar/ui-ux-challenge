@@ -1,7 +1,7 @@
 export const getRecommendedListings = async (limit) => {
   try {
     const response = await fetch(
-      `https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?limit=${limit}`
+      `https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?limit=${limit}&start=0`
     );
     const data = await response.json();
     const listings = data.results.map((listing, index) => ({
