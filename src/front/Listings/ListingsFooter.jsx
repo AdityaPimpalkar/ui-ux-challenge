@@ -1,31 +1,51 @@
+import { useState } from "react";
+
 export const ListingFooter = ({
-  pageNumber,
-  noOfListings,
-  totalCount,
+  noOfListings = 1,
+  totalListings,
   handlePrevPage,
   handleNextPage,
 }) => {
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [nextPageNumber, setNextPageNumber] = useState(noOfListings);
+
+  const onClickPrevious = () => {
+    setCurrentPageNumber(currentPageNumber - noOfListings);
+    setNextPageNumber(nextPageNumber - noOfListings - 1);
+    handlePrevPage();
+  };
+
+  const onClickNext = () => {
+    setCurrentPageNumber(currentPageNumber + noOfListings);
+    setNextPageNumber(nextPageNumber + noOfListings + 1);
+    handleNextPage();
+  };
   return (
     <div className="flex justify-between my-5 items-center">
       <span className="text-sm">
-        Showing {pageNumber}-{noOfListings} of {totalCount}
+        Showing {currentPageNumber}-{nextPageNumber} of {totalListings}
       </span>
       <div className="flex gap-2">
         <button
           className={`text-sm hover:shadow-md font-semibold border border-grey-300 px-5 py-2 rounded-lg 
                     ${
-                      pageNumber === 1
+                      currentPageNumber === 1
                         ? "text-grey-200 disabled:pointer-events-none cursor-not-allowed"
                         : ""
                     }`}
-          onClick={handlePrevPage}
-          disabled={pageNumber === 1}
+          onClick={onClickPrevious}
+          disabled={currentPageNumber === 1}
         >
           Previous
         </button>
         <button
-          className="text-sm hover:shadow-lg font-semibold border border-grey-300 px-5 py-2 rounded-lg"
-          onClick={handleNextPage}
+          className={`text-sm hover:shadow-md font-semibold border border-grey-300 px-5 py-2 rounded-lg 
+            ${
+              currentPageNumber >= totalListings
+                ? "text-grey-200 disabled:pointer-events-none cursor-not-allowed"
+                : ""
+            }`}
+          onClick={onClickNext}
         >
           Next
         </button>

@@ -26,7 +26,7 @@ const Card = ({
         </div>
         <div className={`${rightContent ? "flex-end" : ""}`}>
           {seperator && <Seperator />}
-          <div className="py-2 text-sm text-grey-200 flex justify-between">
+          <div className="py-2 text-sm text-grey-200 flex justify-between items-center">
             {footerLeftContent}
             {footerRightContent}
           </div>

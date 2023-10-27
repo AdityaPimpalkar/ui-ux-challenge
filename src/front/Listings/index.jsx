@@ -11,7 +11,7 @@ export const Listings = () => {
   const recommendedListingsCount = 3;
   const [listings, setListings] = useState([]);
   const [recommendedListings, setRecommendedListings] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalListings, setTotalListings] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
 
   const loadRecommendedContent = useCallback(async () => {
@@ -21,14 +21,14 @@ export const Listings = () => {
 
   const loadListings = useCallback(
     async (pageNumber) => {
-      const { listings, totalListings } = await getListings(
+      const { listings, totalListings: total } = await getListings(
         noOfListings,
         pageNumber
       );
       setListings(listings);
-      setTotalCount(totalListings);
+      setTotalListings(total);
     },
-    [noOfListings, setListings, setTotalCount]
+    [noOfListings, setListings, setTotalListings]
   );
 
   const handleNextPage = () => {
@@ -40,11 +40,12 @@ export const Listings = () => {
   };
 
   useEffect(() => {
-    //first getting the recommended list
     loadRecommendedContent();
-    //then getting our normal list of contents
+  }, [loadRecommendedContent]);
+
+  useEffect(() => {
     loadListings(pageNumber);
-  }, [pageNumber, loadListings, loadRecommendedContent]);
+  }, [pageNumber, loadListings]);
 
   return (
     <>
@@ -60,10 +61,8 @@ export const Listings = () => {
 
       <Seperator />
 
-      {/* The logic of "showing 1-6 of 24324" is not working, but upon clicking next we do fetch new results */}
       <ListingFooter
-        totalCount={totalCount}
-        pageNumber={pageNumber}
+        totalListings={totalListings}
         noOfListings={noOfListings}
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}

@@ -1,7 +1,8 @@
 import { formatDate } from "../../utils";
 import Card from "../../components/Card";
-import { Chip } from "../../components/Chip/Chip";
-import { Favorite } from "grommet-icons";
+import { Chip } from "../../components/Chip";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import { Icon } from "../../components/Icon";
 
 export const ListingCard = ({ listings }) => {
   return (
@@ -15,7 +16,7 @@ export const ListingCard = ({ listings }) => {
         rightContent={
           <div className="ml-auto">
             <div className="flex flex-row-reverse gap-2 items-center">
-              <Favorite size="small" />
+              <Icon ShowIcon={IconHeart} HoverIcon={IconHeartFilled} />
               {listing.isUsuallyBooked ? (
                 <Chip text="Usually booked" accent="grey" />
               ) : null}
