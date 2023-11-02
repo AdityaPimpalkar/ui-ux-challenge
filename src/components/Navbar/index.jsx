@@ -17,16 +17,16 @@ export const Navbar = ({ user }) => {
   }, [toggleUserInfo, userInfoRef]);
 
   return (
-    <>
+    <div className="relative">
       <nav className="w-full flex flex-row justify-between">
-        <div className="flex items-center gap-3">
-          <IconHome size="25" color="#0D7AB5" />
-          <label className="text-md font-semibold text-blue-100">
+        <div className="flex items-center gap-3 cursor-pointer">
+          <IconHome size="30" color="#0D7AB5" />
+          <label className="text-md font-semibold text-blue-100 lg:text-lg xl:text-xl 2xl:text-2xl">
             Acme Homes
           </label>
         </div>
         <div
-          className="rounded-full font-semibold bg-grey-100 w-10 h-10 text-white-100 flex justify-center items-center cursor-pointer"
+          className="rounded-full font-semibold bg-grey-100 w-10 h-10 text-white-100 hover:shadow-xl flex justify-center items-center cursor-pointer lg:w-14 lg:h-14 lg:text-lg"
           onClick={() => setToggleUserInfo(!toggleUserInfo)}
         >
           {user.firstName[0].toUpperCase()}
@@ -34,7 +34,7 @@ export const Navbar = ({ user }) => {
         </div>
       </nav>
       {toggleUserInfo && (
-        <div ref={userInfoRef} className="absolute right-5 w-72 z-50">
+        <div ref={userInfoRef} className="absolute right-0 w-72 z-10">
           <Card
             title={`${user.firstName} ${user.lastName}`}
             subTitle={`${user.email}`}
@@ -51,6 +51,6 @@ export const Navbar = ({ user }) => {
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
