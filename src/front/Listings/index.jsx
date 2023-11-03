@@ -22,7 +22,7 @@ export const Listings = () => {
     const { listings } = await getRecommendedListings(noOfRecommendedListings);
     setRecommendedListings(listings);
     setIsLoadingRecommendedListings(false);
-  }, [noOfRecommendedListings, setRecommendedListings]);
+  }, [noOfRecommendedListings]);
 
   const loadListings = useCallback(
     async (pageNumber) => {
@@ -34,7 +34,7 @@ export const Listings = () => {
       setTotalListings(total);
       setIsLoadingListings(false);
     },
-    [noOfListings, setListings, setTotalListings]
+    [noOfListings]
   );
 
   const handleNextPage = () => {
