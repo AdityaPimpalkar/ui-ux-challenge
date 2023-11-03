@@ -5,19 +5,24 @@ import { Seperator } from "../../components/Seperator";
 import { Header } from "../../components/Header";
 import { getRecommendedListings, getListings } from "../../services/listings";
 import { ListingFooter } from "./ListingsFooter";
+import { CardSkeleton } from "../../components/Card/CardSkeleton";
 
 export const Listings = () => {
   const noOfListings = 6;
-  const recommendedListingsCount = 3;
+  const noOfRecommendedListings = 3;
   const [listings, setListings] = useState([]);
+  const [isLoadingListings, setIsLoadingListings] = useState(true);
   const [recommendedListings, setRecommendedListings] = useState([]);
+  const [isLoadingRecommendedListings, setIsLoadingRecommendedListings] =
+    useState(true);
   const [totalListings, setTotalListings] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
 
   const loadRecommendedContent = useCallback(async () => {
-    const { listings } = await getRecommendedListings(recommendedListingsCount);
+    const { listings } = await getRecommendedListings(noOfRecommendedListings);
     setRecommendedListings(listings);
-  }, [recommendedListingsCount, setRecommendedListings]);
+    setIsLoadingRecommendedListings(false);
+  }, [noOfRecommendedListings, setRecommendedListings]);
 
   const loadListings = useCallback(
     async (pageNumber) => {
@@ -27,16 +32,19 @@ export const Listings = () => {
       );
       setListings(listings);
       setTotalListings(total);
+      setIsLoadingListings(false);
     },
     [noOfListings, setListings, setTotalListings]
   );
 
   const handleNextPage = () => {
     setPageNumber(pageNumber + 1);
+    setIsLoadingListings(true);
   };
 
   const handlePrevPage = () => {
     setPageNumber(pageNumber - 1);
+    setIsLoadingListings(true);
   };
 
   useEffect(() => {
@@ -52,11 +60,19 @@ export const Listings = () => {
       <Header text="Available stays" />
 
       <CardContainer title="Places you might like">
-        <ListingCard listings={recommendedListings} />
+        {isLoadingRecommendedListings &&
+          [...Array(noOfRecommendedListings)].map(() => <CardSkeleton />)}
+        {!isLoadingRecommendedListings && recommendedListings.length > 0 && (
+          <ListingCard listings={recommendedListings} />
+        )}
       </CardContainer>
 
       <CardContainer title="Nearby stays">
-        <ListingCard listings={listings} />
+        {isLoadingListings &&
+          [...Array(noOfListings)].map(() => <CardSkeleton />)}
+        {!isLoadingListings && listings.length > 0 && (
+          <ListingCard listings={listings} />
+        )}
       </CardContainer>
 
       <Seperator />

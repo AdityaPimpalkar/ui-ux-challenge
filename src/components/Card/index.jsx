@@ -10,7 +10,7 @@ const Card = ({
 }) => {
   return (
     <div
-      className="w-100 rounded-lg my-3 px-5 pt-4 pb-2 shadow-md cursor-pointer bg-white
+      className="w-100 rounded-lg my-3 px-5 pt-4 pb-2 shadow-md cursor-pointer bg-white-100
                             hover:shadow-xl"
     >
       <div className="h-full flex flex-col justify-between">

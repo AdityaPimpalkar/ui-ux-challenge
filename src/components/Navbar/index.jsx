@@ -21,7 +21,7 @@ export const Navbar = ({ user }) => {
       <nav className="w-full flex flex-row justify-between">
         <div className="flex items-center gap-3 cursor-pointer">
           <IconHome size="30" color="#0D7AB5" />
-          <label className="text-md font-semibold text-blue-100 lg:text-lg xl:text-xl 2xl:text-2xl">
+          <label className="text-md font-semibold text-blue-100 lg:text-lg xl:text-xl 2xl:text-2xl cursor-pointer">
             Acme Homes
           </label>
         </div>
