@@ -11,13 +11,13 @@ export const ListingFooter = ({
 
   const onClickPrevious = () => {
     setCurrentPageNumber(currentPageNumber - noOfListings);
-    setNextPageNumber(nextPageNumber - noOfListings - 1);
+    setNextPageNumber(nextPageNumber - noOfListings);
     handlePrevPage();
   };
 
   const onClickNext = () => {
     setCurrentPageNumber(currentPageNumber + noOfListings);
-    setNextPageNumber(nextPageNumber + noOfListings + 1);
+    setNextPageNumber(nextPageNumber + noOfListings);
     handleNextPage();
   };
   return (
